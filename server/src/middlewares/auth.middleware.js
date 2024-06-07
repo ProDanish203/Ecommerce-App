@@ -12,7 +12,7 @@ export const verifyAuth = (roles) => {
 
       const payload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
       const user = await User.findById(payload?._id).select(
-        "-password -refreshToken -forgotPasswordToken -forgotPasswordTokenExpiry"
+        "-password -refreshToken -forgotPasswordToken -forgotPasswordTokenExpiry -verifyToken -verifyTokenExpiry"
       );
 
       if (!user) return next("Unauthorized Access");

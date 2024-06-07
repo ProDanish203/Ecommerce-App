@@ -72,7 +72,7 @@ export const loginUser = async (req, res, next) => {
     const { accessToken, refreshToken } = await generateTokens(userData._id);
 
     const user = await User.findById(userData._id).select(
-      "-password -refreshToken -forgotPasswordToken -forgotPasswordTokenExpiry"
+      "-password -refreshToken -forgotPasswordToken -forgotPasswordTokenExpiry -verifyToken -verifyTokenExpiry"
     );
 
     // Cookie options
