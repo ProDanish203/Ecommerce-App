@@ -63,3 +63,12 @@ export const getAllUsers = async (req, res, next) => {
     next(error);
   }
 };
+
+
+export const deleteUser = async (req, res, next) => {
+  try {
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
