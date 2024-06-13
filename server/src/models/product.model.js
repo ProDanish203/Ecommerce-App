@@ -19,6 +19,13 @@ const ProductSchema = new Schema(
       type: Number,
       required: [true, "Product price is required"],
     },
+    category: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Category",
+        required: [true, "Product category is required"],
+      },
+    ],
     images: [
       {
         public_id: {
@@ -31,10 +38,6 @@ const ProductSchema = new Schema(
         },
       },
     ],
-    category: {
-      type: String,
-      required: [true, "Product category is required"],
-    },
     slug: {
       type: String,
       required: [true, "Product Slug is required"],
@@ -43,8 +46,11 @@ const ProductSchema = new Schema(
     stock: {
       type: Number,
       default: 1,
+      min: [0, "Stock cannot be negative"],
     },
-
+    discountPercentage: { type: Number, min: [0, "Discount cannot be negative"], max: [100, "Discount cannot be greater than 100"] },
+    featured: { type: Boolean, default: false },
+    brand: String,
   },
   { timestamps: true }
 );
