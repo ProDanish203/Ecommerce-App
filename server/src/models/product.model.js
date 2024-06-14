@@ -48,7 +48,11 @@ const ProductSchema = new Schema(
       default: 1,
       min: [0, "Stock cannot be negative"],
     },
-    discountPercentage: { type: Number, min: [0, "Discount cannot be negative"], max: [100, "Discount cannot be greater than 100"] },
+    discountPercentage: {
+      type: Number,
+      min: [0, "Discount cannot be negative"],
+      max: [100, "Discount cannot be greater than 100"],
+    },
     featured: { type: Boolean, default: false },
     brand: String,
   },
