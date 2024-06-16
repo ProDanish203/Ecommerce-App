@@ -42,3 +42,4 @@ export const getPaginatedUsers = async ({ query, page, limit, sort }) => {
 
   return { data, pagination };
 };
+
