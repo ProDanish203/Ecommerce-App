@@ -43,3 +43,14 @@ export const getPaginatedUsers = async ({ query, page, limit, sort }) => {
   return { data, pagination };
 };
 
+export const getPaginatedProducts = async ({ query, page, limit, sort }) => {
+  const { data, pagination } = await getPaginatedData({
+    model: Product,
+    query: { ...query },
+    page,
+    limit,
+    sort,
+  });
+
+  return { data, pagination };
+};
