@@ -46,3 +46,11 @@ export const getAllProducts = async (req, res, next) => {
     next(error);
   }
 };
+
+export const deleteProduct = async (req, res, next) => {
+  try {
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
