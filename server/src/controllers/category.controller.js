@@ -63,3 +63,38 @@ export const getCategories = async (req, res, next) => {
     next(error);
   }
 };
+
+
+export const updateCategory = async (req, res, next) => {
+  try {
+    const { name, description, slug } = req.body;
+    const { id } = req.params;
+    const { parentCategory } = req.query;
+
+    if (parentCategory) {
+      const parent = await Category.findById(parentCategory);
+      if (!parent) return next("Parent category not found");
+    }
+    if (!name) return next("Name is required");
+    if (!slug) return next("Slug is required");
+
+    const category = await Category.findByIdAndUpdate(id, {
+      name,
+      description,
+      slug,
+      parentCategory: parentCategory || null,
+      createdBy: req.user._id,
+    });
+
+    if (!category) return next("An error occured while updating category");
+
+    return res.status(201).json({
+      success: true,
+      message: "Category updated",
+      data: category,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
