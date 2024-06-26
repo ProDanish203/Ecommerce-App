@@ -33,7 +33,6 @@ export const addCategory = async (req, res, next) => {
   }
 };
 
-
 export const getCategories = async (req, res, next) => {
   try {
     const page = +(req.query.page || 1);
@@ -63,7 +62,6 @@ export const getCategories = async (req, res, next) => {
     next(error);
   }
 };
-
 
 export const updateCategory = async (req, res, next) => {
   try {
@@ -98,3 +96,18 @@ export const updateCategory = async (req, res, next) => {
   }
 };
 
+export const deleteCategory = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const category = await Category.findByIdAndDelete(id);
+    if (!category) return next("An error occured while deleting category");
+
+    return res.status(201).json({
+      success: true,
+      message: "Category Deleted",
+      data: null,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
