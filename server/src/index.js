@@ -10,6 +10,7 @@ import { errorMiddleware } from "./middlewares/error.middleware.js";
 import authRoute from "./routes/auth.route.js";
 import userRoute from "./routes/user.route.js";
 import productRoute from "./routes/product.route.js";
+import categoryRoute from "./routes/category.route.js";
 
 // .env config
 config();
@@ -43,6 +44,7 @@ app.get("/", (req, res) => {
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/product", productRoute);
+app.use("/api/v1/category", categoryRoute);
 
 // Custom middleware for errors
 app.use(errorMiddleware);
