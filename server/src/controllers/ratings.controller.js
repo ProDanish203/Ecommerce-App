@@ -34,6 +34,35 @@ export const addReview = async (req, res, next) => {
   }
 };
 
+export const updateReview = async (req, res, next) => {
+  try {
+    const { reviewId } = req.params;
+    const { rating, review } = req.body;
+
+    if (!rating) return next("Rating is required");
+
+    const existingReview = await Review.findById(reviewId);
+    if (!existingReview) return next("Review not found");
+
+    if (existingReview.user.toString() !== req.user._id.toString())
+      return next("You can only update your own reviews");
+
+    existingReview.rating = rating ?? existingReview.rating;
+    existingReview.review = review ?? existingReview.review;
+
+    const updatedReview = await existingReview.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Review updated",
+      data: updatedReview,
+    });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
 export const deleteReview = async (req, res, next) => {
   try {
   } catch (error) {
