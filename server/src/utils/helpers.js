@@ -1,6 +1,7 @@
 import { Category } from "../models/category.model.js";
 import { Product } from "../models/product.model.js";
 import { User } from "../models/user.model.js";
+import { Review } from "../models/ratings.model.js";
 
 export const getPaginatedData = async ({
   model,
@@ -60,6 +61,18 @@ export const getPaginatedProducts = async ({ query, page, limit, sort }) => {
 export const getPaginatedCategories = async ({ query, page, limit, sort }) => {
   const { data, pagination } = await getPaginatedData({
     model: Category,
+    query: { ...query },
+    page,
+    limit,
+    sort,
+  });
+
+  return { data, pagination };
+};
+
+export const getPaginatedReviews = async ({ query, page, limit, sort }) => {
+  const { data, pagination } = await getPaginatedData({
+    model: Review,
     query: { ...query },
     page,
     limit,

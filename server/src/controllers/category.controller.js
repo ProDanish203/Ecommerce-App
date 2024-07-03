@@ -55,7 +55,7 @@ export const getCategories = async (req, res, next) => {
     return res.status(200).json({
       success: true,
       message: "All categories",
-      data: products,
+      data: categories,
     });
   } catch (error) {
     console.log(error);

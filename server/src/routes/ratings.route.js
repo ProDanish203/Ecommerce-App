@@ -10,7 +10,7 @@ import { ROLES } from "../utils/constants.js";
 
 const router = Router();
 
-router.get("/", getAllReviews);
+router.get("/:id", getAllReviews);
 router.post("/add", verifyAuth(Object.values(ROLES)), addReview);
 router.put("/:id", verifyAuth(Object.values(ROLES)), updateReview);
 router.delete("/:id", verifyAuth(Object.values(ROLES)), deleteReview);
